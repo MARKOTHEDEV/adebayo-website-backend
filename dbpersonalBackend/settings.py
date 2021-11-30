@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+import django_heroku
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vb)+zg*2sv4@y$gy-9c3dvau6(=sf(%u!n3(%9$89*z6^7=p43'
+SECRET_KEY = os.environ['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
+    # Local app
+    "mainapp.apps.MainappConfig",
+
+    # Third Party Api
+    'rest_framework',
+     'rest_framework.authtoken',
+     'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -119,7 +129,66 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_URL = '/static/'
+STATIC_ROOT = Path(BASE_DIR,'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT =Path(BASE_DIR,'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+"We telling DJango were to find Our Defual User"
+AUTH_USER_MODEL = 'mainapp.User'
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ogechuwkumatthew@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ['gooleApp_password']
+
+
+
+CORS_ALLOWED_ORIGINS = [
+
+"http://localhost:8000",
+]
+
+CORS_ALLOW_METHODS = [
+'DELETE',
+'GET',
+'OPTIONS',
+'PATCH',
+'POST',
+'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+'accept',
+'accept-encoding',
+'authorization',
+'content-type',
+'dnt',
+'origin',
+'user-agent',
+'x-csrftoken',
+'x-requested-with',
+]
+
+
+"Start of Aws S3 bucket settings "
+AWS_ACCESS_KEY_ID = os.environ['aws_access_key_id']
+AWS_SECRET_ACCESS_KEY = os.environ['aws_secret_access_key']
+AWS_STORAGE_BUCKET_NAME = 'emetricslearning'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_REGION_NAME = 'us-east-2'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_S3_VERIFY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' 
+
+
+
+# Heroku Stuff This Just Do All the Heavy Lifing FOr Me IT auto sets Heroku
+django_heroku.settings(config=locals(), staticfiles=False,logging=False)
