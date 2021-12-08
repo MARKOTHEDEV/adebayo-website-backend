@@ -196,4 +196,4 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 # Heroku Stuff This Just Do All the Heavy Lifing FOr Me IT auto sets Heroku
-django_heroku.settings(config=locals(), staticfiles=False,logging=False)
+django_heroku.settings(config=locals(), )
