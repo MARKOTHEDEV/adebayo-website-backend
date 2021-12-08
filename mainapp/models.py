@@ -83,6 +83,7 @@ class peopleEnrollfor(models.Model):
     "many people will enroll for one Event"
     event = models.ForeignKey(Event,on_delete=models.SET_NULL,null=True)
     email= models.EmailField()
+    phone_number= models.CharField(max_length=90,default="NiL")
     name = models.CharField(max_length=300)
 
     def __str__(self):

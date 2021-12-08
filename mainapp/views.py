@@ -40,14 +40,16 @@ def registerForEvent(request,eventID=None):
 
     email =''
     name = ''
+    phone_number = ''
     try:
         email = request.data['email']
         name = request.data['name']
+        phone_number = request.data['phone_number']
     except:
         raise CustomError("Please Check Fields Email and Name are needed")
 
     event = models.Event.objects.get(id=eventID)
-    register  = models.peopleEnrollfor.objects.create(event=event,email=email,name=name)
+    register  = models.peopleEnrollfor.objects.create(event=event,email=email,name=name,phone_number=phone_number)
     register.save()
 
         
