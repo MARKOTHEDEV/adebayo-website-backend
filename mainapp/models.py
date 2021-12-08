@@ -74,7 +74,7 @@ class Event(models.Model):
     event_photo =models.ImageField(upload_to='event_pictures/')
     form_message = models.TextField()
     email_message_confirm = models.TextField()
-
+    is_how_can_help = models.BooleanField(default=False)
     def __str__(self):
         return self.event_name
 
