@@ -156,7 +156,7 @@ CORS_ALLOWED_ORIGINS = [
 "https://www.dbadebayo.com",
 "http://www.dbadebayo.com",
 "http://localhost:3000",
-"https://db-adebayo-portfolio.herokuapp.com"
+"https://db-adebayo-portfolio.herokuapp.com",
 "http://db-adebayo-portfolio.herokuapp.com"
 ]
 
