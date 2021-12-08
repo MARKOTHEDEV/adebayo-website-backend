@@ -154,8 +154,10 @@ EMAIL_HOST_PASSWORD = os.environ['gooleApp_password']
 CORS_ALLOWED_ORIGINS = [
 "http://localhost:8000",
 "https://www.dbadebayo.com",
+"http://www.dbadebayo.com",
 "http://localhost:3000",
 "https://db-adebayo-portfolio.herokuapp.com"
+"http://db-adebayo-portfolio.herokuapp.com"
 ]
 
 CORS_ALLOW_METHODS = [
