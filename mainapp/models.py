@@ -102,3 +102,13 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return f'Testimnials from ..{self.person_name}'
+
+
+class Contact(models.Model):
+    email =      models.EmailField()
+    name = models.CharField(max_length=200)
+    phone_number =  models.CharField(max_length=200)
+    message = models.TextField()
+    
+
+    def __str__(self):return f'{self.name}'

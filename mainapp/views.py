@@ -54,16 +54,16 @@ def registerForEvent(request,eventID=None):
     register.save()
 
         
-    try:
-        send_mail(
-            f'Hi {name} You Registered For {event.event_name}',
-            event.email_message_confirm,
-            settings.EMAIL_HOST_USER,
-            [email],
-            fail_silently=False,
-        )
-    except:
-        raise CustomError('Try again there Seem to Be a Network issue')
+    # try:
+    #     send_mail(
+    #         f'Hi {name} You Registered For {event.event_name}',
+    #         event.email_message_confirm,
+    #         settings.EMAIL_HOST_USER,
+    #         [email],
+    #         fail_silently=False,
+    #     )
+    # except:
+    #     raise CustomError('Try again there Seem to Be a Network issue')
     return Success_response()
 
 @api_view(['GET'])
@@ -120,3 +120,26 @@ def get_all_skits(request,pk=None):
         formated_data.append({'heading_picture':imageUrl,"youtube_link":eachSkit.youtube_link,"heading_text":eachSkit.heading_text})
 
     return Success_response(data=formated_data)
+
+
+@api_view(['POST'])
+def save_contact_us(requst):
+
+
+    email =''
+    name = ''
+    phone_number = ''
+    message= ''
+    try:
+        email = request.data['email']
+        name = request.data['name']
+        phone_number = request.data['phone_number']
+        message = ''
+    except:
+        raise CustomError("Please Check Fields Email and Name are needed")
+
+
+    contact_us = models.Contact.objects.create(email=email,name=name,phone_number=phone_number,message=message)
+
+    contact_us.save()
+    return Success_response()
