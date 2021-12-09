@@ -19,6 +19,7 @@ def get_all_events(request,pk=None):
         eventData.append(
            { "id":event.id,"event_name":event.event_name,
            'event_photo':eventUrl,'form_message':event.form_message,
+           "is_how_can_help":event.is_how_can_help
            
            
            }
