@@ -123,7 +123,7 @@ def get_all_skits(request,pk=None):
 
 
 @api_view(['POST'])
-def save_contact_us(requst):
+def save_contact_us(request):
 
 
     email =''
@@ -134,7 +134,7 @@ def save_contact_us(requst):
         email = request.data['email']
         name = request.data['name']
         phone_number = request.data['phone_number']
-        message = ''
+        message =request.data['message']
     except:
         raise CustomError("Please Check Fields Email and Name are needed")
 
