@@ -70,14 +70,26 @@ class ResourcesTable(models.Model):
         return self.heading_text
 
 class Event(models.Model):
-    event_name = models.CharField(max_length=300)
+    event_name = models.CharField(max_length=300,default='..')
+    sub_menu=models.CharField(max_length=250,default='..')
     event_photo =models.ImageField(upload_to='event_pictures/')
     form_message = models.TextField()
     email_message_confirm = models.TextField()
     is_how_can_help = models.BooleanField(default=False)
+    event_detail = models.TextField(default='..')
     def __str__(self):
         return self.event_name
 
+class TargetAudience(models.Model):
+    event = models.ForeignKey(Event,on_delete=models.CASCADE)
+    target = models.CharField(max_length=250)
+
+class exampleOfTargetAudience(models.Model):
+    target_audience = models.ForeignKey(TargetAudience,on_delete=models.CASCADE)
+    name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return f'{self.name}'
 
 class peopleEnrollfor(models.Model):
     "many people will enroll for one Event"

@@ -12,14 +12,21 @@ def get_all_events(request,pk=None):
     # the reason am doing this is becuse i want access the image url from aws 
     eventData = []
     eventUrl= ''
+    targetData= []
     for event in models.Event.objects.all():
         try:eventUrl = event.event_photo.url
         except:eventUrl =''
-        
+        for i in event.targetaudience_set.all():
+            targetData.append({
+                "id":i.id,"target_name":i.target,'allTargetExample':i.exampleoftargetaudience_set.all().values('name')
+            })
         eventData.append(
            { "id":event.id,"event_name":event.event_name,
            'event_photo':eventUrl,'form_message':event.form_message,
-           "is_how_can_help":event.is_how_can_help
+           "is_how_can_help":event.is_how_can_help,
+           'event_detail':event.event_detail,
+           'event_targetDetail':targetData
+
            
            
            }
