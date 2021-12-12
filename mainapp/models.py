@@ -83,6 +83,7 @@ class Event(models.Model):
 class TargetAudience(models.Model):
     event = models.ForeignKey(Event,on_delete=models.CASCADE)
     target = models.CharField(max_length=250)
+    def __str__(self):return f'Target AUdience:{self.target} -> Event:{self.event.event_name}'
 
 class exampleOfTargetAudience(models.Model):
     target_audience = models.ForeignKey(TargetAudience,on_delete=models.CASCADE)
