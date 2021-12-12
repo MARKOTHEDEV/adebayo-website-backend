@@ -21,7 +21,7 @@ def get_all_events(request,pk=None):
                 "id":i.id,"target_name":i.target,'allTargetExample':i.exampleoftargetaudience_set.all().values('name')
             })
         eventData.append(
-           { "id":event.id,"event_name":event.event_name,
+           { "id":event.id,"event_name":event.event_name,"sub_heading":event.sub_menu,
            'event_photo':eventUrl,'form_message':event.form_message,
            "is_how_can_help":event.is_how_can_help,
            'event_detail':event.event_detail,
